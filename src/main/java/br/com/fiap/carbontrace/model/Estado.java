@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "Estado")
+@Table(name = "TB_ESTADO")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -20,6 +20,10 @@ public class Estado {
     private Long idEstado;
     private String nome;
     private String sigla;
-    private List <Regiao>regioes ;
+
+    @OneToMany
     private List <OrgaoAmbiental> orgaosAmbientais;
+
+    @OneToMany
+    private List<Regiao> regioes;
 }
