@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "Regiao")
+@Table(name = "TB_REGIAO")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -20,8 +20,15 @@ public class Regiao {
     private Long idRegiao;
     private String nome;
     private Double latitude;
-    private Double areaKmQuadrado;
-    private Estado estado;
-    private List <ImagemSatelital> imagensSatelitais;
+    private Double areaKm2;
+
+    @OneToMany
     private List <Ocorrencia> ocorrencias;
+
+    @OneToMany
+    private List <ImagemSatelital> imagensSatelitais;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_regiao_estado")
+    private Estado estado;
 }
