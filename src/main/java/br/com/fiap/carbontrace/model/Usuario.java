@@ -32,4 +32,9 @@ public class Usuario {
 
     @OneToMany
     private List<Relatorio> relatorios;
+
+    @PrePersist
+    public void prePersist() {
+        this.dataCadastro = LocalDate.now();
+    }
 }
