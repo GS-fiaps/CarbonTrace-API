@@ -24,5 +24,5 @@ public class Satelite {
     private Integer anoLancamento;
 
     @OneToMany
-    private List<ImagemSatelital> imagemSatelitais;
+    private List<ImagemSatelital> imagensSatelitais;
 }
