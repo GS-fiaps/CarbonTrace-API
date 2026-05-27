@@ -21,7 +21,7 @@ public class Alerta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAlerta;
     private LocalDate dataEmissao;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private NivelCriticidade nivelCriticidade;
     private String descricao;
 
