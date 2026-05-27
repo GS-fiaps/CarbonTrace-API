@@ -16,21 +16,19 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class AlertaOrgao {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EmbeddedId
     private AlertaOrgaoId id;
 
     private LocalDate dataNotificacao;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private StatusNotificacao statusNotificacao;
 
-    @MapsId
+    @MapsId("idAlerta")
     @ManyToOne
     @JoinColumn(name = "fk_ao_alerta ")
     private Alerta alerta;
 
-    @MapsId
+    @MapsId("idOrgao")
     @ManyToOne
     @JoinColumn(name = "fk_ao_orgao")
     private OrgaoAmbiental orgaoAmbiental;
