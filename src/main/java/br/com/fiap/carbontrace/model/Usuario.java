@@ -23,7 +23,7 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
     private LocalDate dataCadastro;
 
