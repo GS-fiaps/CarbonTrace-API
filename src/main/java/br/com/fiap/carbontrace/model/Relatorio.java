@@ -26,4 +26,9 @@ public class Relatorio {
     @ManyToOne
     @JoinColumn(name = "fk_relatorio_usuario")
     private Usuario usuario;
+
+    @PrePersist
+    public void prePersist() {
+        this.dataGeracao = LocalDate.now();
+    }
 }
