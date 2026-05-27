@@ -20,6 +20,7 @@ public class Regiao {
     private Long idRegiao;
     private String nome;
     private Double latitude;
+    private Double longitude;
     private Double areaKm2;
 
     @OneToMany

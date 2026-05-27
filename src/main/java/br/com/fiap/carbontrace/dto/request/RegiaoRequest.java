@@ -16,6 +16,9 @@ public record RegiaoRequest(
         @NotNull(message = "A latitude é obrigatória")
         Double latitude,
 
+        @NotNull(message = "A latitude é obrigatória")
+        Double longitude,
+
         @NotNull(message = "A área em km² é obrigatória")
         @Positive(message = "A área em km² deve ser maior que zero")
         Double areaKm2,
@@ -29,6 +32,7 @@ public record RegiaoRequest(
         return Regiao.builder()
                 .nome(nome)
                 .latitude(latitude)
+                .longitude(longitude)
                 .areaKm2(areaKm2)
                 .estado(estado)
                 .build();
