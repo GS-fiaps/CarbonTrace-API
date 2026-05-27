@@ -20,7 +20,7 @@ public class OrgaoAmbiental {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idOrgao;
     private String nome;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private TipoOrgao tipo;
     private String emailContato;
 
