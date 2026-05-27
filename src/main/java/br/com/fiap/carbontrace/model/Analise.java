@@ -23,7 +23,7 @@ public class Analise {
     private LocalDate dataAnalise;
     private Double areaDesmatadaKm2;
     private Double percentualVariacao;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private StatusAlerta statusAlerta;
 
     @OneToMany
