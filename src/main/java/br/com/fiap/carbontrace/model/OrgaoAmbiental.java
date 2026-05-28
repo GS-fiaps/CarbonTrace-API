@@ -28,6 +28,6 @@ public class OrgaoAmbiental {
     private List<AlertaOrgao> alertasOrgaos;
 
     @ManyToOne
-    @JoinColumn(name = "fk_orgao_estado")
+    @JoinColumn(name = "id_estado")
     private Estado estado;
 }
