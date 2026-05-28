@@ -1,8 +1,9 @@
 package br.com.fiap.carbontrace.enums;
 
 public enum StatusAlerta {
-    NORMAL,
-    ATENCAO,
+    BAIXO,
+    MEDIO,
     CRITICO,
-    EMERGENCIA
+    ALTO,
+    ATENCAO
 }

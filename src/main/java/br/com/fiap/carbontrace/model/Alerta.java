@@ -29,6 +29,6 @@ public class Alerta {
     private List<AlertaOrgao> alertasOrgaos;
 
     @ManyToOne
-    @JoinColumn(name = "fk_alerta_analise")
+    @JoinColumn(name = "id_analise")
     private Analise analise;
 }
