@@ -27,10 +27,10 @@ public class ImagemSatelital {
     private List<Analise> analises;
 
     @ManyToOne
-    @JoinColumn(name = "fk_imagem_regiao")
+    @JoinColumn(name = "id_regiao")
     private Regiao regiao;
 
     @ManyToOne
-    @JoinColumn(name = "fk_imagem_satelite")
+    @JoinColumn(name = "id_satelite")
     private Satelite satelite;
 }
