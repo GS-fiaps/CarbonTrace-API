@@ -2,6 +2,6 @@ package br.com.fiap.carbontrace.enums;
 
 public enum TipoUsuario {
     ADMIN,
-    ANALISATA,
+    ANALISTA,
     FISCAL
 }
