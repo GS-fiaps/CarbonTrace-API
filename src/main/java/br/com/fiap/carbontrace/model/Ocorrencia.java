@@ -23,10 +23,10 @@ public class Ocorrencia {
     private Double areaEstimadaKm2;
 
     @ManyToOne
-    @JoinColumn(name = "fk_ocorrencia_regiao")
+    @JoinColumn(name = "id_regiao")
     private Regiao regiao;
 
     @ManyToOne
-    @JoinColumn(name = "fk_ocorrencia_usuario")
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 }
