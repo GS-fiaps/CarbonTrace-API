@@ -1,5 +1,6 @@
 package br.com.fiap.carbontrace.controller;
 
+import br.com.fiap.carbontrace.assembler.OcorrenciaAssembler;
 import br.com.fiap.carbontrace.dto.request.OcorrenciaRequest;
 import br.com.fiap.carbontrace.dto.response.OcorrenciaResponse;
 import br.com.fiap.carbontrace.service.OcorrenciaService;
@@ -9,11 +10,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 @RequestMapping("/ocorrencias")
@@ -22,6 +27,7 @@ import java.util.List;
 public class OcorrenciaController {
 
     private final OcorrenciaService ocorrenciaService;
+    private final OcorrenciaAssembler ocorrenciaAssembler;
 
     @PostMapping
     @Operation(
@@ -33,9 +39,11 @@ public class OcorrenciaController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos enviados na requisição"),
             @ApiResponse(responseCode = "404", description = "Região ou usuário não encontrado")
     })
-    public ResponseEntity<OcorrenciaResponse> cadastrar(@RequestBody @Valid OcorrenciaRequest request) {
+    public ResponseEntity<EntityModel<OcorrenciaResponse>> cadastrar(
+            @RequestBody @Valid OcorrenciaRequest request
+    ) {
         OcorrenciaResponse response = ocorrenciaService.cadastrar(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ocorrenciaAssembler.toModel(response));
     }
 
     @GetMapping
@@ -46,9 +54,18 @@ public class OcorrenciaController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ocorrências listadas com sucesso")
     })
-    public ResponseEntity<List<OcorrenciaResponse>> listarTodos() {
-        List<OcorrenciaResponse> ocorrencias = ocorrenciaService.listarTodos();
-        return ResponseEntity.ok(ocorrencias);
+    public ResponseEntity<CollectionModel<EntityModel<OcorrenciaResponse>>> listarTodos() {
+        List<EntityModel<OcorrenciaResponse>> ocorrencias = ocorrenciaService.listarTodos()
+                .stream()
+                .map(ocorrenciaAssembler::toModel)
+                .toList();
+
+        CollectionModel<EntityModel<OcorrenciaResponse>> collection = CollectionModel.of(
+                ocorrencias,
+                linkTo(methodOn(OcorrenciaController.class).listarTodos()).withSelfRel()
+        );
+
+        return ResponseEntity.ok(collection);
     }
 
     @GetMapping("/{id}")
@@ -60,9 +77,9 @@ public class OcorrenciaController {
             @ApiResponse(responseCode = "200", description = "Ocorrência encontrada com sucesso"),
             @ApiResponse(responseCode = "404", description = "Ocorrência não encontrada")
     })
-    public ResponseEntity<OcorrenciaResponse> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<EntityModel<OcorrenciaResponse>> buscarPorId(@PathVariable Long id) {
         OcorrenciaResponse response = ocorrenciaService.buscarPorId(id);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(ocorrenciaAssembler.toModel(response));
     }
 
     @PutMapping("/{id}")
@@ -75,12 +92,12 @@ public class OcorrenciaController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos enviados na requisição"),
             @ApiResponse(responseCode = "404", description = "Ocorrência, região ou usuário não encontrado")
     })
-    public ResponseEntity<OcorrenciaResponse> atualizar(
+    public ResponseEntity<EntityModel<OcorrenciaResponse>> atualizar(
             @PathVariable Long id,
             @RequestBody @Valid OcorrenciaRequest request
     ) {
         OcorrenciaResponse response = ocorrenciaService.atualizar(id, request);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(ocorrenciaAssembler.toModel(response));
     }
 
     @DeleteMapping("/{id}")
