@@ -1,5 +1,6 @@
 package br.com.fiap.carbontrace.controller;
 
+import br.com.fiap.carbontrace.assembler.AlertaOrgaoAssembler;
 import br.com.fiap.carbontrace.dto.request.AlertaOrgaoRequest;
 import br.com.fiap.carbontrace.dto.response.AlertaOrgaoResponse;
 import br.com.fiap.carbontrace.service.AlertaOrgaoService;
@@ -9,11 +10,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 @RequestMapping("/alertas-orgaos")
@@ -22,6 +27,7 @@ import java.util.List;
 public class AlertaOrgaoController {
 
     private final AlertaOrgaoService alertaOrgaoService;
+    private final AlertaOrgaoAssembler alertaOrgaoAssembler;
 
     @PostMapping
     @Operation(
@@ -34,9 +40,11 @@ public class AlertaOrgaoController {
             @ApiResponse(responseCode = "404", description = "Alerta ou órgão ambiental não encontrado"),
             @ApiResponse(responseCode = "409", description = "Este alerta já foi vinculado a este órgão ambiental")
     })
-    public ResponseEntity<AlertaOrgaoResponse> cadastrar(@RequestBody @Valid AlertaOrgaoRequest request) {
+    public ResponseEntity<EntityModel<AlertaOrgaoResponse>> cadastrar(
+            @RequestBody @Valid AlertaOrgaoRequest request
+    ) {
         AlertaOrgaoResponse response = alertaOrgaoService.cadastrar(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(alertaOrgaoAssembler.toModel(response));
     }
 
     @GetMapping
@@ -47,26 +55,35 @@ public class AlertaOrgaoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vínculos listados com sucesso")
     })
-    public ResponseEntity<List<AlertaOrgaoResponse>> listarTodos() {
-        List<AlertaOrgaoResponse> response = alertaOrgaoService.listarTodos();
-        return ResponseEntity.ok(response);
+    public ResponseEntity<CollectionModel<EntityModel<AlertaOrgaoResponse>>> listarTodos() {
+        List<EntityModel<AlertaOrgaoResponse>> vinculos = alertaOrgaoService.listarTodos()
+                .stream()
+                .map(alertaOrgaoAssembler::toModel)
+                .toList();
+
+        CollectionModel<EntityModel<AlertaOrgaoResponse>> collection = CollectionModel.of(
+                vinculos,
+                linkTo(methodOn(AlertaOrgaoController.class).listarTodos()).withSelfRel()
+        );
+
+        return ResponseEntity.ok(collection);
     }
 
     @GetMapping("/alerta/{alertaId}/orgao/{orgaoAmbientalId}")
     @Operation(
             summary = "Buscar vínculo por chave composta",
-            description = "Busca um vínculo específico entre alerta e órgão ambiental usando o ID do alerta e o ID do órgão ambiental."
+            description = "Busca um vínculo específico usando o ID do alerta e o ID do órgão ambiental."
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vínculo encontrado com sucesso"),
             @ApiResponse(responseCode = "404", description = "Vínculo entre alerta e órgão ambiental não encontrado")
     })
-    public ResponseEntity<AlertaOrgaoResponse> buscarPorId(
+    public ResponseEntity<EntityModel<AlertaOrgaoResponse>> buscarPorId(
             @PathVariable Long alertaId,
             @PathVariable Long orgaoAmbientalId
     ) {
         AlertaOrgaoResponse response = alertaOrgaoService.buscarPorId(alertaId, orgaoAmbientalId);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(alertaOrgaoAssembler.toModel(response));
     }
 
     @PutMapping("/alerta/{alertaId}/orgao/{orgaoAmbientalId}")
@@ -79,13 +96,13 @@ public class AlertaOrgaoController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos enviados na requisição"),
             @ApiResponse(responseCode = "404", description = "Vínculo entre alerta e órgão ambiental não encontrado")
     })
-    public ResponseEntity<AlertaOrgaoResponse> atualizar(
+    public ResponseEntity<EntityModel<AlertaOrgaoResponse>> atualizar(
             @PathVariable Long alertaId,
             @PathVariable Long orgaoAmbientalId,
             @RequestBody @Valid AlertaOrgaoRequest request
     ) {
         AlertaOrgaoResponse response = alertaOrgaoService.atualizar(alertaId, orgaoAmbientalId, request);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(alertaOrgaoAssembler.toModel(response));
     }
 
     @DeleteMapping("/alerta/{alertaId}/orgao/{orgaoAmbientalId}")
