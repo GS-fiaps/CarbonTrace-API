@@ -1,5 +1,6 @@
 package br.com.fiap.carbontrace.controller;
 
+import br.com.fiap.carbontrace.assembler.RegiaoAssembler;
 import br.com.fiap.carbontrace.dto.request.RegiaoRequest;
 import br.com.fiap.carbontrace.dto.response.RegiaoResponse;
 import br.com.fiap.carbontrace.service.RegiaoService;
@@ -9,11 +10,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 @RequestMapping("/regioes")
@@ -22,6 +27,7 @@ import java.util.List;
 public class RegiaoController {
 
     private final RegiaoService regiaoService;
+    private final RegiaoAssembler regiaoAssembler;
 
     @PostMapping
     @Operation(
@@ -33,9 +39,9 @@ public class RegiaoController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos enviados na requisição"),
             @ApiResponse(responseCode = "404", description = "Estado não encontrado")
     })
-    public ResponseEntity<RegiaoResponse> cadastrar(@RequestBody @Valid RegiaoRequest request) {
+    public ResponseEntity<EntityModel<RegiaoResponse>> cadastrar(@RequestBody @Valid RegiaoRequest request) {
         RegiaoResponse response = regiaoService.cadastrar(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(regiaoAssembler.toModel(response));
     }
 
     @GetMapping
@@ -46,9 +52,18 @@ public class RegiaoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Regiões listadas com sucesso")
     })
-    public ResponseEntity<List<RegiaoResponse>> listarTodos() {
-        List<RegiaoResponse> regioes = regiaoService.listarTodos();
-        return ResponseEntity.ok(regioes);
+    public ResponseEntity<CollectionModel<EntityModel<RegiaoResponse>>> listarTodos() {
+        List<EntityModel<RegiaoResponse>> regioes = regiaoService.listarTodos()
+                .stream()
+                .map(regiaoAssembler::toModel)
+                .toList();
+
+        CollectionModel<EntityModel<RegiaoResponse>> collection = CollectionModel.of(
+                regioes,
+                linkTo(methodOn(RegiaoController.class).listarTodos()).withSelfRel()
+        );
+
+        return ResponseEntity.ok(collection);
     }
 
     @GetMapping("/{id}")
@@ -60,9 +75,9 @@ public class RegiaoController {
             @ApiResponse(responseCode = "200", description = "Região encontrada com sucesso"),
             @ApiResponse(responseCode = "404", description = "Região não encontrada")
     })
-    public ResponseEntity<RegiaoResponse> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<EntityModel<RegiaoResponse>> buscarPorId(@PathVariable Long id) {
         RegiaoResponse response = regiaoService.buscarPorId(id);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(regiaoAssembler.toModel(response));
     }
 
     @PutMapping("/{id}")
@@ -75,12 +90,12 @@ public class RegiaoController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos enviados na requisição"),
             @ApiResponse(responseCode = "404", description = "Região ou estado não encontrado")
     })
-    public ResponseEntity<RegiaoResponse> atualizar(
+    public ResponseEntity<EntityModel<RegiaoResponse>> atualizar(
             @PathVariable Long id,
             @RequestBody @Valid RegiaoRequest request
     ) {
         RegiaoResponse response = regiaoService.atualizar(id, request);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(regiaoAssembler.toModel(response));
     }
 
     @DeleteMapping("/{id}")
