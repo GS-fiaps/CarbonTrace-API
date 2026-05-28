@@ -24,7 +24,7 @@ public class Relatorio {
     private LocalDate periodoFim;
 
     @ManyToOne
-    @JoinColumn(name = "fk_relatorio_usuario")
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     @PrePersist
