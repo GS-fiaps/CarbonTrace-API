@@ -30,6 +30,6 @@ public class Analise {
     private List<Alerta> alertas;
 
     @ManyToOne
-    @JoinColumn(name = "fk_analise_imagem")
+    @JoinColumn(name = "id_imagem")
     private ImagemSatelital imagemSatelital;
 }
