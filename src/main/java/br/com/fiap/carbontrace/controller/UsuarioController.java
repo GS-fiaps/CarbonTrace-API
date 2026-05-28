@@ -1,19 +1,24 @@
 package br.com.fiap.carbontrace.controller;
 
+import br.com.fiap.carbontrace.assembler.UsuarioAssembler;
 import br.com.fiap.carbontrace.dto.request.UsuarioRequest;
 import br.com.fiap.carbontrace.dto.response.UsuarioResponse;
 import br.com.fiap.carbontrace.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -22,6 +27,7 @@ import java.util.List;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
+    private final UsuarioAssembler usuarioAssembler;
 
     @PostMapping
     @Operation(summary = "Cadastrar usuário", description = "Cria um novo usuário na plataforma CarbonTrace.")
@@ -29,9 +35,9 @@ public class UsuarioController {
             @ApiResponse(responseCode = "201", description = "Usuário cadastrado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Dados inválidos enviados na requisição")
     })
-    public ResponseEntity<UsuarioResponse> cadastrar(@RequestBody @Valid UsuarioRequest request) {
+    public ResponseEntity<EntityModel<UsuarioResponse>> cadastrar(@RequestBody @Valid UsuarioRequest request) {
         UsuarioResponse response = usuarioService.cadastrar(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioAssembler.toModel(response));
     }
 
     @GetMapping
@@ -39,9 +45,18 @@ public class UsuarioController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuários listados com sucesso")
     })
-    public ResponseEntity<List<UsuarioResponse>> listarTodos() {
-        List<UsuarioResponse> usuarios = usuarioService.listarTodos();
-        return ResponseEntity.ok(usuarios);
+    public ResponseEntity<CollectionModel<EntityModel<UsuarioResponse>>> listarTodos() {
+        List<EntityModel<UsuarioResponse>> usuarios = usuarioService.listarTodos()
+                .stream()
+                .map(usuarioAssembler::toModel)
+                .toList();
+
+        CollectionModel<EntityModel<UsuarioResponse>> collection = CollectionModel.of(
+                usuarios,
+                linkTo(methodOn(UsuarioController.class).listarTodos()).withSelfRel()
+        );
+
+        return ResponseEntity.ok(collection);
     }
 
     @GetMapping("/{id}")
@@ -50,9 +65,9 @@ public class UsuarioController {
             @ApiResponse(responseCode = "200", description = "Usuário encontrado com sucesso"),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
     })
-    public ResponseEntity<UsuarioResponse> buscarPorId(@PathVariable Long id) {
-        UsuarioResponse usuario = usuarioService.buscarPorId(id);
-        return ResponseEntity.ok(usuario);
+    public ResponseEntity<EntityModel<UsuarioResponse>> buscarPorId(@PathVariable Long id) {
+        UsuarioResponse response = usuarioService.buscarPorId(id);
+        return ResponseEntity.ok(usuarioAssembler.toModel(response));
     }
 
     @PutMapping("/{id}")
@@ -62,12 +77,12 @@ public class UsuarioController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos enviados na requisição"),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
     })
-    public ResponseEntity<UsuarioResponse> atualizar(
+    public ResponseEntity<EntityModel<UsuarioResponse>> atualizar(
             @PathVariable Long id,
             @RequestBody @Valid UsuarioRequest request
     ) {
         UsuarioResponse response = usuarioService.atualizar(id, request);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(usuarioAssembler.toModel(response));
     }
 
     @DeleteMapping("/{id}")
