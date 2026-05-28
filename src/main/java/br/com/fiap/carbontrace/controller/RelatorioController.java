@@ -1,5 +1,6 @@
 package br.com.fiap.carbontrace.controller;
 
+import br.com.fiap.carbontrace.assembler.RelatorioAssembler;
 import br.com.fiap.carbontrace.dto.request.RelatorioRequest;
 import br.com.fiap.carbontrace.dto.response.RelatorioResponse;
 import br.com.fiap.carbontrace.service.RelatorioService;
@@ -9,11 +10,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 @RequestMapping("/relatorios")
@@ -22,6 +27,7 @@ import java.util.List;
 public class RelatorioController {
 
     private final RelatorioService relatorioService;
+    private final RelatorioAssembler relatorioAssembler;
 
     @PostMapping
     @Operation(
@@ -33,9 +39,9 @@ public class RelatorioController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos enviados na requisição"),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
     })
-    public ResponseEntity<RelatorioResponse> cadastrar(@RequestBody @Valid RelatorioRequest request) {
+    public ResponseEntity<EntityModel<RelatorioResponse>> cadastrar(@RequestBody @Valid RelatorioRequest request) {
         RelatorioResponse response = relatorioService.cadastrar(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(relatorioAssembler.toModel(response));
     }
 
     @GetMapping
@@ -46,9 +52,18 @@ public class RelatorioController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Relatórios listados com sucesso")
     })
-    public ResponseEntity<List<RelatorioResponse>> listarTodos() {
-        List<RelatorioResponse> relatorios = relatorioService.listarTodos();
-        return ResponseEntity.ok(relatorios);
+    public ResponseEntity<CollectionModel<EntityModel<RelatorioResponse>>> listarTodos() {
+        List<EntityModel<RelatorioResponse>> relatorios = relatorioService.listarTodos()
+                .stream()
+                .map(relatorioAssembler::toModel)
+                .toList();
+
+        CollectionModel<EntityModel<RelatorioResponse>> collection = CollectionModel.of(
+                relatorios,
+                linkTo(methodOn(RelatorioController.class).listarTodos()).withSelfRel()
+        );
+
+        return ResponseEntity.ok(collection);
     }
 
     @GetMapping("/{id}")
@@ -60,9 +75,9 @@ public class RelatorioController {
             @ApiResponse(responseCode = "200", description = "Relatório encontrado com sucesso"),
             @ApiResponse(responseCode = "404", description = "Relatório não encontrado")
     })
-    public ResponseEntity<RelatorioResponse> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<EntityModel<RelatorioResponse>> buscarPorId(@PathVariable Long id) {
         RelatorioResponse response = relatorioService.buscarPorId(id);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(relatorioAssembler.toModel(response));
     }
 
     @PutMapping("/{id}")
@@ -75,12 +90,12 @@ public class RelatorioController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos enviados na requisição"),
             @ApiResponse(responseCode = "404", description = "Relatório ou usuário não encontrado")
     })
-    public ResponseEntity<RelatorioResponse> atualizar(
+    public ResponseEntity<EntityModel<RelatorioResponse>> atualizar(
             @PathVariable Long id,
             @RequestBody @Valid RelatorioRequest request
     ) {
         RelatorioResponse response = relatorioService.atualizar(id, request);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(relatorioAssembler.toModel(response));
     }
 
     @DeleteMapping("/{id}")
