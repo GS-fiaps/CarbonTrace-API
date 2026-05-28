@@ -30,6 +30,6 @@ public class Regiao {
     private List <ImagemSatelital> imagensSatelitais;
 
     @ManyToOne
-    @JoinColumn(name = "fk_regiao_estado")
+    @JoinColumn(name = "id_estado")
     private Estado estado;
 }
