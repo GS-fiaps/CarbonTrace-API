@@ -1,5 +1,6 @@
 package br.com.fiap.carbontrace.controller;
 
+import br.com.fiap.carbontrace.assembler.ImagemSatelitalAssembler;
 import br.com.fiap.carbontrace.dto.request.ImagemSatelitalRequest;
 import br.com.fiap.carbontrace.dto.response.ImagemSatelitalResponse;
 import br.com.fiap.carbontrace.service.ImagemSatelitalService;
@@ -9,11 +10,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 @RequestMapping("/imagens-satelitais")
@@ -22,6 +27,7 @@ import java.util.List;
 public class ImagemSatelitalController {
 
     private final ImagemSatelitalService imagemSatelitalService;
+    private final ImagemSatelitalAssembler imagemSatelitalAssembler;
 
     @PostMapping
     @Operation(
@@ -33,9 +39,11 @@ public class ImagemSatelitalController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos enviados na requisição"),
             @ApiResponse(responseCode = "404", description = "Região ou satélite não encontrado")
     })
-    public ResponseEntity<ImagemSatelitalResponse> cadastrar(@RequestBody @Valid ImagemSatelitalRequest request) {
+    public ResponseEntity<EntityModel<ImagemSatelitalResponse>> cadastrar(
+            @RequestBody @Valid ImagemSatelitalRequest request
+    ) {
         ImagemSatelitalResponse response = imagemSatelitalService.cadastrar(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(imagemSatelitalAssembler.toModel(response));
     }
 
     @GetMapping
@@ -46,9 +54,18 @@ public class ImagemSatelitalController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Imagens satelitais listadas com sucesso")
     })
-    public ResponseEntity<List<ImagemSatelitalResponse>> listarTodos() {
-        List<ImagemSatelitalResponse> imagens = imagemSatelitalService.listarTodos();
-        return ResponseEntity.ok(imagens);
+    public ResponseEntity<CollectionModel<EntityModel<ImagemSatelitalResponse>>> listarTodos() {
+        List<EntityModel<ImagemSatelitalResponse>> imagens = imagemSatelitalService.listarTodos()
+                .stream()
+                .map(imagemSatelitalAssembler::toModel)
+                .toList();
+
+        CollectionModel<EntityModel<ImagemSatelitalResponse>> collection = CollectionModel.of(
+                imagens,
+                linkTo(methodOn(ImagemSatelitalController.class).listarTodos()).withSelfRel()
+        );
+
+        return ResponseEntity.ok(collection);
     }
 
     @GetMapping("/{id}")
@@ -60,9 +77,9 @@ public class ImagemSatelitalController {
             @ApiResponse(responseCode = "200", description = "Imagem satelital encontrada com sucesso"),
             @ApiResponse(responseCode = "404", description = "Imagem satelital não encontrada")
     })
-    public ResponseEntity<ImagemSatelitalResponse> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<EntityModel<ImagemSatelitalResponse>> buscarPorId(@PathVariable Long id) {
         ImagemSatelitalResponse response = imagemSatelitalService.buscarPorId(id);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(imagemSatelitalAssembler.toModel(response));
     }
 
     @PutMapping("/{id}")
@@ -75,12 +92,12 @@ public class ImagemSatelitalController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos enviados na requisição"),
             @ApiResponse(responseCode = "404", description = "Imagem satelital, região ou satélite não encontrado")
     })
-    public ResponseEntity<ImagemSatelitalResponse> atualizar(
+    public ResponseEntity<EntityModel<ImagemSatelitalResponse>> atualizar(
             @PathVariable Long id,
             @RequestBody @Valid ImagemSatelitalRequest request
     ) {
         ImagemSatelitalResponse response = imagemSatelitalService.atualizar(id, request);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(imagemSatelitalAssembler.toModel(response));
     }
 
     @DeleteMapping("/{id}")
