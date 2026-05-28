@@ -25,11 +25,11 @@ public class AlertaOrgao {
 
     @MapsId("idAlerta")
     @ManyToOne
-    @JoinColumn(name = "fk_ao_alerta ")
+    @JoinColumn(name = "id_alerta ")
     private Alerta alerta;
 
     @MapsId("idOrgao")
     @ManyToOne
-    @JoinColumn(name = "fk_ao_orgao")
+    @JoinColumn(name = "id_orgao")
     private OrgaoAmbiental orgaoAmbiental;
 }
