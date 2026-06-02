@@ -6,5 +6,6 @@ public enum StatusAlerta {
     CRITICO,
     ALTO,
     ATENCAO,
-    EMERGENCIA
+    EMERGENCIA,
+    NORMAL
 }
