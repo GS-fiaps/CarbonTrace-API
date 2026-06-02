@@ -18,6 +18,9 @@ public record UsuarioResponse(
         @Schema(description = "E-mail do usuário", example = "joao@email.com")
         String email,
 
+        @Schema(description = "Senha de acesso do usuário", example = "123456")
+        String senha,
+
         @Schema(description = "Tipo do usuário", example = "ANALISTA")
         TipoUsuario tipoUsuario,
 
@@ -30,6 +33,7 @@ public record UsuarioResponse(
                 usuario.getIdUsuario(),
                 usuario.getNome(),
                 usuario.getEmail(),
+                usuario.getSenha(),
                 usuario.getTipoUsuario(),
                 usuario.getDataCadastro()
         );
