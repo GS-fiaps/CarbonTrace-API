@@ -1,0 +1,1616 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: CarbonTrace
+meta:
+  id: wrk_63cbfede221a48bfaffca06915b3a232
+  created: 1779976698201
+  modified: 1779976698201
+  description: ""
+collection:
+  - name: Usuario
+    meta:
+      id: fld_618ca5e51c234a758a113c14aeb54c04
+      created: 1779976707384
+      modified: 1780409329070
+      sortKey: -1779976707384
+      description: ""
+    children:
+      - url: https://carbontrace-api-production.up.railway.app/usuarios
+        name: Cadastrar usuário
+        meta:
+          id: req_5c0bdb73bb684d269a5066610b9348ce
+          created: 1779976709453
+          modified: 1780408720521
+          isPrivate: false
+          description: ""
+          sortKey: -1779976709453
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Maria Oliveira",
+              "email": "maria.oliveira@email.com",
+              "senha": "123456",
+              "tipoUsuario": "ADMIN"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/usuarios
+        name: Listar todos os usuários
+        meta:
+          id: req_b3bbb340cc924eaa99de441f08874cee
+          created: 1779977106256
+          modified: 1780408851622
+          isPrivate: false
+          description: ""
+          sortKey: -1779977106256
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/usuarios/1
+        name: Buscar usuário por ID
+        meta:
+          id: req_d1a6748447dc4755a59aae44d79392ae
+          created: 1779977193989
+          modified: 1780408866470
+          isPrivate: false
+          description: ""
+          sortKey: -1779977193989
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/usuarios/1
+        name: Atualizar usuário
+        meta:
+          id: req_dfd838577b764cfa9c9a9e82ecec675a
+          created: 1779977236840
+          modified: 1780408875654
+          isPrivate: false
+          description: ""
+          sortKey: -1779977236840
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "João Silva Atualizado",
+              "email": "joao.atualizado@email.com",
+              "senha": "654321",
+              "tipoUsuario": "ADMIN"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/usuarios/1
+        name: Deletar usuário
+        meta:
+          id: req_efd47f1ddec148a192d5559c560fd253
+          created: 1779977266111
+          modified: 1780408884612
+          isPrivate: false
+          description: ""
+          sortKey: -1779977266111
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Estado
+    meta:
+      id: fld_f8c74da7bf584fb1b0eb3f31c099d3c7
+      created: 1779977671755
+      modified: 1779977671755
+      sortKey: -1779977671755
+      description: ""
+    children:
+      - url: https://carbontrace-api-production.up.railway.app/estados/1
+        name: Deletar
+        meta:
+          id: req_ccd09c076e49408e998228ca5c8a88ac
+          created: 1779977677034
+          modified: 1780408941699
+          isPrivate: false
+          description: ""
+          sortKey: -1779977677034
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/estados/1
+        name: Atualizar Estado
+        meta:
+          id: req_a11933a40b424ce2808b4728b4fe3c7e
+          created: 1779977678917
+          modified: 1780408930190
+          isPrivate: false
+          description: ""
+          sortKey: -1779977678917
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Estado Teste Atualizado",
+              "sigla": "AT"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/estados/1
+        name: Buscar por ID
+        meta:
+          id: req_3157ac0db19a4e6e94b3c69dcb1b6e66
+          created: 1779977679665
+          modified: 1780408923751
+          isPrivate: false
+          description: ""
+          sortKey: -1779977679665
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/estados
+        name: Listar todos os estados
+        meta:
+          id: req_7086486d10d5416e8765b2327dcf454a
+          created: 1779977681335
+          modified: 1780408915695
+          isPrivate: false
+          description: ""
+          sortKey: -1779977681335
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/estados
+        name: Cadastrar Estado
+        meta:
+          id: req_4e8f7dfb28654236a47a8936549f11a0
+          created: 1779977682196
+          modified: 1780408900443
+          isPrivate: false
+          description: ""
+          sortKey: -1779977682196
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Estado Teste",
+              "sigla": "ET"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Satelite
+    meta:
+      id: fld_486a1451592640ef9d523f49fa6b1c1c
+      created: 1779978175033
+      modified: 1779978175033
+      sortKey: -1779978175033
+      description: ""
+    children:
+      - url: https://carbontrace-api-production.up.railway.app/satelites/1
+        name: New Request
+        meta:
+          id: req_00c980c0170643a796e77275f7689bb9
+          created: 1779978177791
+          modified: 1780408983409
+          isPrivate: false
+          description: ""
+          sortKey: -1779978177791
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/satelites/1
+        name: Atualizar satelite
+        meta:
+          id: req_aaa53a0818cd41288f9c29e18698d55e
+          created: 1779978180536
+          modified: 1780408977248
+          isPrivate: false
+          description: ""
+          sortKey: -1779978180536
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Hog Rider",
+              "agencia": "CR",
+              "altitudeKm": 6767.0,
+              "anoLancamento": 2067
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/satelites/1
+        name: Buscar por ID
+        meta:
+          id: req_27cc04b70ea444ddb6c4df5328a4b31d
+          created: 1779978180912
+          modified: 1780408970566
+          isPrivate: false
+          description: ""
+          sortKey: -1779978180912
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/satelites
+        name: Listar todos os satelites
+        meta:
+          id: req_43f5e9c9ecee4a9ab2b811a7c6cf269c
+          created: 1779978181128
+          modified: 1780408964035
+          isPrivate: false
+          description: ""
+          sortKey: -1779978181128
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/satelites
+        name: Cadastrar satélite
+        meta:
+          id: req_2bf830ad797d42308f74cc821de97bcd
+          created: 1779978181319
+          modified: 1780408958080
+          isPrivate: false
+          description: ""
+          sortKey: -1779978181319
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Teste 67",
+              "agencia": "sixeseven",
+              "altitudeKm": 705.0,
+              "anoLancamento": 2017
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Regiao
+    meta:
+      id: fld_fa75ece744194171a147c44db0b3fdce
+      created: 1779978578767
+      modified: 1780001208340
+      sortKey: -1779978578767
+      description: ""
+    children:
+      - url: https://carbontrace-api-production.up.railway.app/regioes/1
+        name: Deletar
+        meta:
+          id: req_1e8b39f675a648edb4b84844029900e0
+          created: 1779978581271
+          modified: 1780409025802
+          isPrivate: false
+          description: ""
+          sortKey: -1779978587210
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/regioes/1
+        name: Atualizar região
+        meta:
+          id: req_e8716d0b3a554ca4bdbe8088ffe5b11a
+          created: 1779978583719
+          modified: 1780409019596
+          isPrivate: false
+          description: ""
+          sortKey: -1779978587310
+        method: PUT
+        body:
+          mimeType: application/json
+          text: ""
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/regioes/1
+        name: Buscar por ID
+        meta:
+          id: req_ac14077eea0c417caa06e6ecba02f6e6
+          created: 1779978583914
+          modified: 1780409013525
+          isPrivate: false
+          description: ""
+          sortKey: -1779978587410
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/regioes
+        name: Listar todas as regiões
+        meta:
+          id: req_22e12d4043de4740901f5c6b8dc15293
+          created: 1779978584055
+          modified: 1780409006499
+          isPrivate: false
+          description: ""
+          sortKey: -1779978587510
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/regioes
+        name: Cadastrar região
+        meta:
+          id: req_090634dcffcd4cdfaaf5a177d8ffceba
+          created: 1779978584174
+          modified: 1780409000349
+          isPrivate: false
+          description: ""
+          sortKey: -1779978587610
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Amazônia Legal",
+              "latitude": -3.4653,
+              "longitude": -62.2159,
+              "areaKm2": 5000000.0,
+              "estadoId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: ImagemSatelital
+    meta:
+      id: fld_48c8742f0f424275a949db68eb572d18
+      created: 1779979317047
+      modified: 1780001566721
+      sortKey: -1779979317047
+      description: ""
+    children:
+      - url: https://carbontrace-api-production.up.railway.app/imagens-satelitais/1
+        name: Deletar
+        meta:
+          id: req_831eef96b8f94c06b77e4f2f3948311e
+          created: 1779979319622
+          modified: 1780409060453
+          isPrivate: false
+          description: ""
+          sortKey: -1779979323463
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/imagens-satelitais/1
+        name: Atualizar imagem satelital
+        meta:
+          id: req_ed35f5e960fd4e568556ca367a9d5708
+          created: 1779979319831
+          modified: 1780409054110
+          isPrivate: false
+          description: ""
+          sortKey: -1779979323563
+        method: PUT
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "dataCaptura": "2026-05-21",
+              "resolucaoMetros": 15.0,
+              "urlImagem": "https://exemplo.com/imagens/amazonia-atualizada.jpg",
+              "regiaoId": 1,
+              "sateliteId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/imagens-satelitais/1
+        name: Buscar por ID
+        meta:
+          id: req_181eb3a8dccd4b3e948ca9b65b5e2f1c
+          created: 1779979320030
+          modified: 1780409047877
+          isPrivate: false
+          description: ""
+          sortKey: -1779979323663
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/imagens-satelitais
+        name: Listar todas as imagens satelitais
+        meta:
+          id: req_1d7bdc1995ef4d2f8e94a621de5e266b
+          created: 1779979320174
+          modified: 1780409040131
+          isPrivate: false
+          description: ""
+          sortKey: -1779979323763
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/imagens-satelitais
+        name: Cadastrar imagem satelital
+        meta:
+          id: req_c293cce7cb8b41bb9d54ee2cff0e51aa
+          created: 1779979329205
+          modified: 1780409033151
+          isPrivate: false
+          description: ""
+          sortKey: -1779979323863
+        method: POST
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "dataCaptura": "2026-05-20",
+              "resolucaoMetros": 10.0,
+              "urlImagem": "https://exemplo.com/imagens/amazonia-2026-05-20.jpg",
+              "regiaoId": 1,
+              "sateliteId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Ocorrencia
+    meta:
+      id: fld_08bea39641ec45aabc159959a5122c87
+      created: 1779979786647
+      modified: 1780001568320
+      sortKey: -1779979786647
+      description: ""
+    children:
+      - url: https://carbontrace-api-production.up.railway.app/ocorrencias/1
+        name: Deletar
+        meta:
+          id: req_c6c1de4c4267432ca4e197f48205111d
+          created: 1779979789990
+          modified: 1780409094612
+          isPrivate: false
+          description: ""
+          sortKey: -1779979791843
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/ocorrencias/1
+        name: Buscar por ID
+        meta:
+          id: req_680aeed97f0e4b2598da062cf59fe206
+          created: 1779979790341
+          modified: 1780409078844
+          isPrivate: false
+          description: ""
+          sortKey: -1779979791943
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/ocorrencias/1
+        name: Atualizar ocorrencia
+        meta:
+          id: req_2fa26a2a072845069186eecf811f46c3
+          created: 1779979790661
+          modified: 1780409087545
+          isPrivate: false
+          description: ""
+          sortKey: -1779979791893
+        method: PUT
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "dataOcorrencia": "2026-05-21",
+              "descricao": "Ocorrência atualizada após nova verificação da região.",
+              "areaEstimadaKm2": 15.8,
+              "regiaoId": 1,
+              "usuarioId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/ocorrencias
+        name: Listar todas as ocorrencias
+        meta:
+          id: req_b5633ffbb30045bdb8b2d6e87f6dc7af
+          created: 1779979795006
+          modified: 1780409073255
+          isPrivate: false
+          description: ""
+          sortKey: -1779979795006
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/ocorrencias
+        name: Cadastrar ocorrência
+        meta:
+          id: req_278e56801e5f4a7bb268cbfd3bfd56b6
+          created: 1779979795429
+          modified: 1780409068303
+          isPrivate: false
+          description: ""
+          sortKey: -1779979795429
+        method: POST
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "dataOcorrencia": "2026-05-20",
+              "descricao": "Área com indícios de desmatamento detectada por análise satelital.",
+              "areaEstimadaKm2": 12.5,
+              "regiaoId": 1,
+              "usuarioId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Analise
+    meta:
+      id: fld_b8643e25c652473cb5fe4add2c425935
+      created: 1779980256159
+      modified: 1779980256159
+      sortKey: -1779980256159
+      description: ""
+    children:
+      - url: https://carbontrace-api-production.up.railway.app/analises/1
+        name: Deletar
+        meta:
+          id: req_7e41eca96e90451b97bf9edc5ff9c19c
+          created: 1779980259373
+          modified: 1780409126669
+          isPrivate: false
+          description: ""
+          sortKey: -1779980260976
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/analises/1
+        name: Atualizar analise
+        meta:
+          id: req_f87d44ba540c47d095fb6b37c71bf109
+          created: 1779980261679
+          modified: 1780409121006
+          isPrivate: false
+          description: ""
+          sortKey: -1779980261679
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "dataAnalise": "2026-05-23",
+              "areaDesmatadaKm2": 10.2,
+              "percentualVariacao": 15.0,
+              "statusAlerta": "CRITICO",
+              "imagemSatelitalId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/analises/1
+        name: Buscar por ID
+        meta:
+          id: req_3b8c8a6237a44bb2b88e3dae91d3805c
+          created: 1779980261904
+          modified: 1780409115686
+          isPrivate: false
+          description: ""
+          sortKey: -1779980261904
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/analises
+        name: Listar todas as analises
+        meta:
+          id: req_8bf39c20e0fb477497ee8e8e9aa2342b
+          created: 1779980262018
+          modified: 1780409109900
+          isPrivate: false
+          description: ""
+          sortKey: -1779980262018
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/analises
+        name: Cadastrar análise
+        meta:
+          id: req_ef3647a5dcfd420fb0c3446e5522c9f7
+          created: 1779980262844
+          modified: 1780409104237
+          isPrivate: false
+          description: ""
+          sortKey: -1779980262844
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "dataAnalise": "2026-05-22",
+              "areaDesmatadaKm2": 8.7,
+              "percentualVariacao": 12.5,
+              "statusAlerta": "NORMAL",
+              "imagemSatelitalId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Relatorio
+    meta:
+      id: fld_3ad1ad8047434a31b9196b5194ad3973
+      created: 1779980593196
+      modified: 1779980593196
+      sortKey: -1779980593196
+      description: ""
+    children:
+      - url: https://carbontrace-api-production.up.railway.app/relatorios/1
+        name: Atualizar relatorio
+        meta:
+          id: req_4b307d34214d4e94b186ac34fca34714
+          created: 1779980595893
+          modified: 1780409157750
+          isPrivate: false
+          description: ""
+          sortKey: -1779980599141
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "dataGeracao": "2026-05-29",
+              "titulo": "Relatório Atualizado de Monitoramento Ambiental",
+              "periodoInicio": "2026-05-01",
+              "periodoFim": "2026-05-29",
+              "usuarioId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/relatorios/1
+        name: Deletar
+        meta:
+          id: req_f1fd253ae9b74546aeddbdfc4d014c91
+          created: 1779980597828
+          modified: 1780409169362
+          isPrivate: false
+          description: ""
+          sortKey: -1779980599091
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/relatorios/1
+        name: Buscar por ID
+        meta:
+          id: req_2cff88491d0140bcbd8c24a4396aa53c
+          created: 1779980598077
+          modified: 1780409148447
+          isPrivate: false
+          description: ""
+          sortKey: -1779980599191
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/relatorios
+        name: Listar todos os relatorios
+        meta:
+          id: req_1a4b10b96a7a4226b35a7978147bfd60
+          created: 1779980602148
+          modified: 1780409143175
+          isPrivate: false
+          description: ""
+          sortKey: -1779980602148
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/relatorios
+        name: Cadastrar relatório
+        meta:
+          id: req_1c5005a1cf674f5497d4dcf5d29215b9
+          created: 1779980602316
+          modified: 1780409137225
+          isPrivate: false
+          description: ""
+          sortKey: -1779980602316
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "dataGeracao": "2026-05-28",
+              "titulo": "Relatório de Monitoramento Ambiental",
+              "periodoInicio": "2026-05-01",
+              "periodoFim": "2026-05-28",
+              "usuarioId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Alertas
+    meta:
+      id: fld_9359ab4918b94ea3b230d9f3939bf398
+      created: 1779981614200
+      modified: 1779981614200
+      sortKey: -1779981614200
+      description: ""
+    children:
+      - url: https://carbontrace-api-production.up.railway.app/alertas/1
+        name: Deletar
+        meta:
+          id: req_6593968eaf754d1da9980d7a52195914
+          created: 1779981619411
+          modified: 1780409206564
+          isPrivate: false
+          description: ""
+          sortKey: -1779981619411
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/alertas/1
+        name: Atualizar alerta
+        meta:
+          id: req_6698b8c6ce7043259c6326485372028b
+          created: 1779981619601
+          modified: 1780409200348
+          isPrivate: false
+          description: ""
+          sortKey: -1779981619601
+        method: PUT
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "dataEmissao": "2026-05-28",
+              "nivelCriticidade": "MEDIO",
+              "descricao": "Alerta atualizado após nova análise da região monitorada.",
+              "analiseId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/alertas/1
+        name: Buscar por ID
+        meta:
+          id: req_ba55b2727740432c93bb2d2a1c683820
+          created: 1779981619788
+          modified: 1780409194067
+          isPrivate: false
+          description: ""
+          sortKey: -1779981619788
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/alertas
+        name: Listar todos os alertas
+        meta:
+          id: req_a184b4ac8bf54e669b40a131184b4c6c
+          created: 1779981620092
+          modified: 1780409188525
+          isPrivate: false
+          description: ""
+          sortKey: -1779981620092
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/alertas
+        name: Cadastrar alerta
+        meta:
+          id: req_16fc7fb712b14d7b94e6d0f324f737fc
+          created: 1779981621468
+          modified: 1780409180630
+          isPrivate: false
+          description: ""
+          sortKey: -1779981621468
+        method: POST
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "dataEmissao": "2026-05-28",
+              "nivelCriticidade": "ALTO",
+              "descricao": "Alerta emitido por aumento significativo de área desmatada.",
+              "analiseId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Orgao Ambiental
+    meta:
+      id: fld_5eebb0f8c1ae4c9b897ed182f022b962
+      created: 1779982424718
+      modified: 1779982424718
+      sortKey: -1779982424718
+      description: ""
+    children:
+      - url: https://carbontrace-api-production.up.railway.app/orgaos-ambientais/1
+        name: Deletar
+        meta:
+          id: req_b7f10325815b4cd9a13e0a0c39ac3a62
+          created: 1779982427100
+          modified: 1780409240587
+          isPrivate: false
+          description: ""
+          sortKey: -1779982427100
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/orgaos-ambientais/1
+        name: Atualizar Orgao Ambiental
+        meta:
+          id: req_448791e99945414c9fadf568597e945f
+          created: 1779982428842
+          modified: 1780409231429
+          isPrivate: false
+          description: ""
+          sortKey: -1779982428842
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Secretaria Estadual do Meio Ambiente",
+              "tipo": "ESTADUAL",
+              "emailContato": "meioambiente@estado.gov.br",
+              "estadoId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/orgaos-ambientais/1
+        name: Buscar por ID
+        meta:
+          id: req_7510bd00fbde40a28507e2bb91fcc5d2
+          created: 1779982429164
+          modified: 1780409223255
+          isPrivate: false
+          description: ""
+          sortKey: -1779982429164
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/orgaos-ambientais
+        name: Listar todos os orgaos ambientais
+        meta:
+          id: req_ed6d8df5254d4ab9b73e5df9502cf21d
+          created: 1779982429377
+          modified: 1780409219754
+          isPrivate: false
+          description: ""
+          sortKey: -1779982429377
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/orgaos-ambientais
+        name: Cadastrar órgão ambiental
+        meta:
+          id: req_c3fe9318fe234882a40a7f60bdc6ed5b
+          created: 1779982429569
+          modified: 1780409216798
+          isPrivate: false
+          description: ""
+          sortKey: -1779982429569
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "IBAMA",
+              "tipo": "FEDERAL",
+              "emailContato": "contato@ibama.gov.br",
+              "estadoId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Alerta/Orgao
+    meta:
+      id: fld_ee211832f7bb4418b8740bb854b6adce
+      created: 1779982821560
+      modified: 1779982821560
+      sortKey: -1779982821560
+      description: ""
+    children:
+      - url: https://carbontrace-api-production.up.railway.app/alertas-orgaos/alerta/1/orgao/1
+        name: Deletar vínculo
+        meta:
+          id: req_091f7f15fbda497d9111c826d57bc6b4
+          created: 1779982824371
+          modified: 1780409309644
+          isPrivate: false
+          description: ""
+          sortKey: -1779982824371
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/alertas-orgaos/alerta/1/orgao/1
+        name: Atualizar vínculo
+        meta:
+          id: req_367e2234a00c432eaaf1e2e59e42252b
+          created: 1779982826633
+          modified: 1780409271141
+          isPrivate: false
+          description: ""
+          sortKey: -1779982826633
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "alertaId": 1,
+              "orgaoAmbientalId": 1,
+              "dataNotificacao": "2026-05-28",
+              "statusNotificacao": "CONFIRMADO"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/alertas-orgaos/alerta/1/orgao/1
+        name: Buscar por chave composta
+        meta:
+          id: req_f12116f6e70344b2ae2291b2e29822cc
+          created: 1779982827254
+          modified: 1780409263442
+          isPrivate: false
+          description: ""
+          sortKey: -1779982827254
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/alertas-orgaos
+        name: Listar todos alerta/orgao
+        meta:
+          id: req_f0af34f1d1ed4277999528bd1cbd4e80
+          created: 1779982827833
+          modified: 1780409257069
+          isPrivate: false
+          description: ""
+          sortKey: -1779982827833
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://carbontrace-api-production.up.railway.app/alertas-orgaos
+        name: Cadastrar vínculo alerta/órgão
+        meta:
+          id: req_972715722e2b49fe8c1996c395ebcf36
+          created: 1779982828377
+          modified: 1780409249992
+          isPrivate: false
+          description: ""
+          sortKey: -1779982828377
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "alertaId": 1,
+              "orgaoAmbientalId": 1,
+              "dataNotificacao": "2026-05-28",
+              "statusNotificacao": "ENVIADO"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_e720c894b4c31890ab0b8c8466dc3dc13e955c62
+    created: 1779976698204
+    modified: 1779976698204
+environments:
+  name: Base Environment
+  meta:
+    id: env_e720c894b4c31890ab0b8c8466dc3dc13e955c62
+    created: 1779976698202
+    modified: 1779976698202
+    isPrivate: false
