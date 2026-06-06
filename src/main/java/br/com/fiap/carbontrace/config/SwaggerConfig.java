@@ -17,8 +17,8 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI carbonTraceOpenAPI() {
         Server localServer = new Server()
-                .url("http://localhost:8080")
-                .description("Ambiente Local");
+                .url("https://carbontrace-api-production.up.railway.app")
+                .description("Ambiente de Produção - Railway");
 
         return new OpenAPI()
                 .servers(List.of(localServer))
