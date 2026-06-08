@@ -548,7 +548,7 @@ https://youtu.be/htFP0SzNciI
 Link do pitch:
 
 ```text
-INSERIR_LINK_DO_VIDEO_PITCH
+https://www.youtube.com/watch?v=CYeMi10KvSs
 ```
 
 ## Repositório
